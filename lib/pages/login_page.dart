@@ -1,7 +1,11 @@
+import 'package:authentication_system/componetns/my_textfield.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -10,35 +14,48 @@ class LoginPage extends StatelessWidget {
       home: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.grey.shade300,
-          body: const Center(
+          body: Center(
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
                 //logo
-                Icon(
+                const Icon(
                   Icons.lock,
                   size: 100,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
-
-                Text(
+                // wellcome back messege
+                const Text(
                   "W E L L C O M E ",
                   style: TextStyle(
                       color: Color.fromARGB(255, 53, 51, 51),
                       fontSize: 20,
                       fontFamily: 'Segoe UI'),
                 ),
-
-                // wellcome back messege
-
                 // username text field
 
-                // password text field
+                const SizedBox(
+                  height: 50,
+                ),
+                MyTextField(
+                  controller: usernameController,
+                  hintText: "User Name",
+                  obscureText: false,
+                ),
 
+                // password text field
+                const SizedBox(
+                  height: 50,
+                ),
+                MyTextField(
+                  controller: passwordController,
+                  hintText: "Password",
+                  obscureText: true,
+                ),
                 // forgot password
 
                 // sign in button
