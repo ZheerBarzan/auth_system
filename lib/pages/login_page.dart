@@ -1,3 +1,4 @@
+import 'package:authentication_system/componetns/my_button.dart';
 import 'package:authentication_system/componetns/my_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +7,8 @@ class LoginPage extends StatelessWidget {
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+
+  void signUserIn() {}
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +60,28 @@ class LoginPage extends StatelessWidget {
                   obscureText: true,
                 ),
                 // forgot password
-
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        "Forgot password?",
+                        style: TextStyle(color: Colors.grey.shade600),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
                 // sign in button
+                MyButton(
+                  onTap: signUserIn,
+                ),
 
                 // continue with apple or google
 
