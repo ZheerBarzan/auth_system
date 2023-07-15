@@ -20,6 +20,7 @@ class LoginPage extends StatelessWidget {
           backgroundColor: Colors.grey.shade300,
           body: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(
                   height: 50,
@@ -43,7 +44,7 @@ class LoginPage extends StatelessWidget {
                 // username text field
 
                 const SizedBox(
-                  height: 50,
+                  height: 40,
                 ),
                 MyTextField(
                   controller: usernameController,
@@ -123,14 +124,34 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SqureTile(imagePath: "lib/images/google.png"),
-                    SizedBox(width: 20),
+                    SizedBox(width: 10),
                     SqureTile(imagePath: "lib/images/apple.png"),
-                    SizedBox(width: 20),
+                    SizedBox(width: 10),
                     SqureTile(imagePath: "lib/images/microsoft.png"),
                   ],
                 ),
 
                 // not a member sign up
+                const SizedBox(
+                  height: 50,
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "not a member?",
+                      style: TextStyle(color: Color.fromARGB(255, 97, 97, 97)),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "Register now!",
+                      style: TextStyle(
+                          color: Colors.blue, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                )
               ],
             ),
           ),
