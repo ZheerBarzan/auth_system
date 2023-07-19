@@ -127,7 +127,7 @@ class LoginPage extends StatelessWidget {
                     SizedBox(width: 10),
                     SqureTile(imagePath: "lib/images/apple.png"),
                     SizedBox(width: 10),
-                    SqureTile(imagePath: "lib/images/microsoft.png"),
+                    SqureTile(imagePath: "lib/images/ms.png"),
                   ],
                 ),
 
