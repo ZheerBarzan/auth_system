@@ -1,7 +1,7 @@
 import 'package:authentication_system/componetns/my_button.dart';
 import 'package:authentication_system/componetns/my_textfield.dart';
 import 'package:authentication_system/componetns/squre_tile.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -27,12 +27,42 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
 
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: usernameController.text,
-      password: passwordController.text,
-    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: usernameController.text,
+        password: passwordController.text,
+      );
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      if (e.code == "user-not-found") {
+        emailNotFoundMessege();
+      } else if (e.code == "wrong-password") {
+        passwordIncorrectMessege();
+      }
+    }
+  }
 
-    Navigator.pop(context);
+  void emailNotFoundMessege() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          title: Text("Wrong Email or UserName!!✌️😎"),
+        );
+      },
+    );
+  }
+
+  void passwordIncorrectMessege() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          title: Text("your password is wrong!!✌️😎"),
+        );
+      },
+    );
   }
 
   @override
