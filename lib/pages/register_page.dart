@@ -5,20 +5,20 @@ import 'package:authentication_system/componetns/squre_tile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final Function()? onTap;
-  const LoginPage({super.key, required this.onTap});
+  const RegisterPage({super.key, required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPage();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPage extends State<RegisterPage> {
   final usernameController = TextEditingController();
 
   final passwordController = TextEditingController();
 
-  void signUserIn() async {
+  void signUserUp() async {
     showDialog(
       context: context,
       builder: (context) {
@@ -126,6 +126,15 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 10,
                   ),
+                  MyTextField(
+                    controller: passwordController,
+                    hintText: "Confirm Password",
+                    obscureText: true,
+                  ),
+                  // forgot password
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: Row(
@@ -143,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   // sign in button
                   MyButton(
-                    onTap: signUserIn,
+                    onTap: signUserUp,
                   ),
                   const SizedBox(
                     height: 50,
@@ -200,7 +209,7 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        "not a member?",
+                        "already a member ?",
                         style:
                             TextStyle(color: Color.fromARGB(255, 97, 97, 97)),
                       ),
@@ -210,7 +219,7 @@ class _LoginPageState extends State<LoginPage> {
                       GestureDetector(
                         onTap: widget.onTap,
                         child: const Text(
-                          "Register now!",
+                          "Login now!",
                           style: TextStyle(
                               color: Colors.blue, fontWeight: FontWeight.bold),
                         ),
