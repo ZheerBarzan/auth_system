@@ -1,6 +1,7 @@
 import 'package:authentication_system/componetns/my_button.dart';
 import 'package:authentication_system/componetns/my_textfield.dart';
 import 'package:authentication_system/componetns/squre_tile.dart';
+import 'package:authentication_system/services/auth_service.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -172,14 +173,23 @@ class _LoginPageState extends State<LoginPage> {
                     height: 20,
                   ),
                   // apple and google sign in
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SqureTile(imagePath: "lib/images/google.png"),
-                      SizedBox(width: 10),
-                      SqureTile(imagePath: "lib/images/apple.png"),
-                      SizedBox(width: 10),
-                      SqureTile(imagePath: "lib/images/ms.png"),
+                      SqureTile(
+                        imagePath: "lib/images/google.png",
+                        onTap: () => AuthService().signInWithGoogle(),
+                      ),
+                      const SizedBox(width: 10),
+                      const SqureTile(
+                        imagePath: "lib/images/apple.png",
+                        onTap: null,
+                      ),
+                      const SizedBox(width: 10),
+                      const SqureTile(
+                        imagePath: "lib/images/ms.png",
+                        onTap: null,
+                      ),
                     ],
                   ),
 

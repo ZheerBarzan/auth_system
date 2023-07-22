@@ -5,6 +5,8 @@ import 'package:authentication_system/componetns/squre_tile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../services/auth_service.dart';
+
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
   const RegisterPage({super.key, required this.onTap});
@@ -165,17 +167,25 @@ class _RegisterPage extends State<RegisterPage> {
                     height: 20,
                   ),
                   // apple and google sign in
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SqureTile(imagePath: "lib/images/google.png"),
-                      SizedBox(width: 10),
-                      SqureTile(imagePath: "lib/images/apple.png"),
-                      SizedBox(width: 10),
-                      SqureTile(imagePath: "lib/images/ms.png"),
+                      SqureTile(
+                        imagePath: "lib/images/google.png",
+                        onTap: () => AuthService().signInWithGoogle(),
+                      ),
+                      const SizedBox(width: 10),
+                      const SqureTile(
+                        imagePath: "lib/images/apple.png",
+                        onTap: null,
+                      ),
+                      const SizedBox(width: 10),
+                      const SqureTile(
+                        imagePath: "lib/images/ms.png",
+                        onTap: null,
+                      ),
                     ],
                   ),
-
                   // not a member sign up
                   const SizedBox(
                     height: 40,
