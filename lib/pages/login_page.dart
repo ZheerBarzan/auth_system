@@ -33,6 +33,7 @@ class _LoginPageState extends State<LoginPage> {
         email: usernameController.text,
         password: passwordController.text,
       );
+
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
@@ -42,30 +43,19 @@ class _LoginPageState extends State<LoginPage> {
       // and make the chiled of the method text(messege)
 
       if (e.code == "user-not-found") {
-        emailNotFoundMessege();
+        showErrorMessege("Wrong Email or UserName!!✌️😎");
       } else if (e.code == "wrong-password") {
-        passwordIncorrectMessege();
+        showErrorMessege("your password is wrong!!✌️😎");
       }
     }
   }
 
-  void emailNotFoundMessege() {
+  void showErrorMessege(String error) {
     showDialog(
       context: context,
       builder: (context) {
-        return const AlertDialog(
-          title: Text("Wrong Email or UserName!!✌️😎"),
-        );
-      },
-    );
-  }
-
-  void passwordIncorrectMessege() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          title: Text("your password is wrong!!✌️😎"),
+        return AlertDialog(
+          title: Text(error),
         );
       },
     );
@@ -109,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   MyTextField(
                     controller: usernameController,
-                    hintText: "User Name",
+                    hintText: "Email",
                     obscureText: false,
                   ),
 
@@ -143,6 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   // sign in button
                   MyButton(
+                    text: "Sign IN",
                     onTap: signUserIn,
                   ),
                   const SizedBox(

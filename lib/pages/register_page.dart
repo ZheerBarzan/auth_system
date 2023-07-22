@@ -15,8 +15,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPage extends State<RegisterPage> {
   final usernameController = TextEditingController();
-
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   void signUserUp() async {
     showDialog(
@@ -29,43 +29,28 @@ class _RegisterPage extends State<RegisterPage> {
     );
 
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: usernameController.text,
-        password: passwordController.text,
-      );
+      if (passwordController.text == confirmPasswordController.text) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: usernameController.text,
+          password: passwordController.text,
+        );
+      } else {
+        showErrorMessege("The passwords do not match");
+      }
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
 
-      // we can also use one method for the code below using this code
-      // showerorrmessege(e.code);
-      // and make the chiled of the method text(messege)
-
-      if (e.code == "user-not-found") {
-        emailNotFoundMessege();
-      } else if (e.code == "wrong-password") {
-        passwordIncorrectMessege();
-      }
+      showErrorMessege(e.code);
     }
   }
 
-  void emailNotFoundMessege() {
+  void showErrorMessege(String error) {
     showDialog(
       context: context,
       builder: (context) {
-        return const AlertDialog(
-          title: Text("Wrong Email or UserName!!✌️😎"),
-        );
-      },
-    );
-  }
-
-  void passwordIncorrectMessege() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          title: Text("your password is wrong!!✌️😎"),
+        return AlertDialog(
+          title: Text(error),
         );
       },
     );
@@ -96,7 +81,7 @@ class _RegisterPage extends State<RegisterPage> {
                   ),
                   // wellcome back messege
                   const Text(
-                    "W E L L C O M E ",
+                    "Let's create an account for you!",
                     style: TextStyle(
                         color: Color.fromARGB(255, 53, 51, 51),
                         fontSize: 20,
@@ -109,25 +94,25 @@ class _RegisterPage extends State<RegisterPage> {
                   ),
                   MyTextField(
                     controller: usernameController,
-                    hintText: "User Name",
+                    hintText: "Email",
                     obscureText: false,
                   ),
 
                   // password text field
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   MyTextField(
                     controller: passwordController,
                     hintText: "Password",
                     obscureText: true,
                   ),
-                  // forgot password
+                  // confirm password
                   const SizedBox(
                     height: 10,
                   ),
                   MyTextField(
-                    controller: passwordController,
+                    controller: confirmPasswordController,
                     hintText: "Confirm Password",
                     obscureText: true,
                   ),
@@ -135,27 +120,17 @@ class _RegisterPage extends State<RegisterPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "Forgot password?",
-                          style: TextStyle(color: Colors.grey.shade600),
-                        ),
-                      ],
-                    ),
-                  ),
+
                   const SizedBox(
                     height: 30,
                   ),
                   // sign in button
                   MyButton(
+                    text: "Sign Up",
                     onTap: signUserUp,
                   ),
                   const SizedBox(
-                    height: 50,
+                    height: 30,
                   ),
                   // continue with apple or google
                   const Padding(
@@ -203,7 +178,7 @@ class _RegisterPage extends State<RegisterPage> {
 
                   // not a member sign up
                   const SizedBox(
-                    height: 50,
+                    height: 40,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
